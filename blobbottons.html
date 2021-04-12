@@ -2,47 +2,100 @@
 <html>
 <body>
   <style>
-     .awesome-button {
-            display: block;
+     . .play {
+            float: left;
             width: 381px;
             height: 450px;
             background: url("https://github.com/Luca-Alessi/Graphics/blob/Buttons/spritesheet.png?raw=true") no-repeat 0 0;
-            margin-bottom: 1em;
+            margin-left: 100px;
            
+
         }
         
-        #mybutton {
-          background-color: white;
-          border: none;  
-        }
+#buttonPlay {
+  background-color: #B277D5;
+  border: none;
+  border-radius:300px 0px 0px 300px;
 
-        #mybutton:hover {
-          background-color: white;
-          border: none;  
-        }
+}
 
-        #mybutton:focus {
-          outline: none;
+#buttonPlay:hover {
+  background-color: #B277D5;
+  border: none;  
+}
+
+#buttonPlay:focus {
+  outline: none;
+}
+
+ .pause {
+            float: right;
+            width: 516px;
+            height: 600px;
+            background: url("https://github.com/Luca-Alessi/Graphics/blob/Buttons/spritePause125.png?raw=true") no-repeat 0 0;
+          
+
         }
+        
+#buttonPause {
+  background-color: #B277D5;
+  border: none; 
+  border-radius: 0px 300px 300px 0px;
+}
+
+#buttonPause:hover {
+  background-color: #B277D5;
+  border: none;  
+}
+
+#buttonPause:focus {
+  outline: none;
+}
+
+
+.container {
+  display: flex;
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+  zoom:0.4;
+    -moz-transform:scale(0.5);
+    -moz-transform-origin: 0 0;
+  border-radius:50px;
+}
+
+body{
+  background-color: white;
+}
+       
+    
        
     
   </style>
   <!--just the html stuff-->
   <div class="container">
+
         
-        <button id="mybutton">
-        <a class="awesome-button"></a>
+        <button id="buttonPlay">
+        <a class="play"></a>
         </button>
         
-  </div>        
+         <button id="buttonPause">
+        <a class="pause"></a>
+        </button>
+        
+</div>        
+
+
 
   <!--pulling in jquery and the sprite clip script-->      
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://luca-alessi.github.io/SpriteClip.js/dist/spriteclip.js"></script>
   <!--using sprite clip to create my own interactive animation-->
   <script>
-    //Instantiate and get the instance from the element's data-spriteClip property
-var instance = $(".awesome-button").spriteClip						({
+    
+            //Instantiate and get the instance from the element's data-spriteClip property
+var instance = $(".play").spriteClip						({
                 totalFrames: 163,
                 frameRate: 60,
                 stops: [1, 163]
@@ -50,11 +103,11 @@ var instance = $(".awesome-button").spriteClip						({
 
     
 $(document).ready(function(){
-  $("#mybutton").click(function(){
+  $("#buttonPlay").click(function(){
  
   onOff();
   })});
-
+  
 var clicked = false;
 function onOff () {
 
@@ -67,6 +120,38 @@ function onOff () {
   	console.log("off");
     instance.rewind();
   clicked = false;
+  }
+	
+}    
+  
+  
+  var instancePause = $(".pause").spriteClip						({
+                totalFrames: 125,
+                frameRate: 60,
+                stops: [1, 125]
+            }).data("spriteClip");
+
+    
+$(document).ready(function(){
+  $("#buttonPause").click(function(){
+ 
+  onOff2();
+  })});
+
+/*made two different funcs / variables so I wouldn't have to deal with the mess. I plan to clean this up later*/
+	  
+var clicked2 = false;
+function onOff2 () {
+
+	if (clicked2 == false) {
+  	console.log("on");
+    instancePause.play();
+  clicked2 = true;
+  }
+  else {
+  	console.log("off");
+    instancePause.rewind();
+  clicked2 = false;
   }
 	
 }  
